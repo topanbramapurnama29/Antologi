@@ -1,4 +1,6 @@
-<html lang="id"><head>
+<!DOCTYPE html>
+<html lang="id">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Portal LENTERA</title>
@@ -60,7 +62,14 @@
     </style>
 </head>
 
-<body data-judul="Portal LENTERA" data-sandiguru="GURU61" data-urltemplate="#" data-urlguru="#" data-urlkelas7="https://drive.google.com/drive/folders/1h8a54ra9xFCQWkXJcoIlRbBQYns2i47e" data-urlkelas8="#" data-urlkelas9="#">
+<!-- Link default sudah ditanam langsung ke sistem -->
+<body data-judul="Portal LENTERA" 
+      data-sandiguru="GURU61" 
+      data-urltemplate="https://drive.google.com/drive/folders/1Mv1gFb0Vq2FhbP_yBd_JBXY6kc_ACLHj" 
+      data-urlguru="https://drive.google.com/drive/folders/1VgBgFfPdNXJ7SFhMY6h7ttujUsVXcugJ" 
+      data-urlkelas7="https://drive.google.com/drive/folders/1h8a54ra9xFCQWkXJcoIlRbBQYns2i47e" 
+      data-urlkelas8="https://drive.google.com/drive/folders/13jAarcajQAWPWOtROuXtoV_kDVf7eJDp" 
+      data-urlkelas9="https://drive.google.com/drive/folders/1iZypxqIuzcHx4z4Ea4U7gOYDipKciMml">
 
     <header>
         <!-- Memanggil gambar logo yang ada di satu folder yang sama -->
@@ -97,10 +106,10 @@
         <section class="border-top-amber">
             <h2 style="color: #d97706;">Jadwal Kegiatan</h2>
             <ul class="text-sm">
-                <li><strong>7 - 10 Nopember:</strong> Sosialisasi &amp; Pembagian Tugas</li>
-                <li><strong>11 - 18 Nopember:</strong> Penulisan &amp; Pengumpulan Naskah</li>
+                <li><strong>7 - 10 Nopember:</strong> Sosialisasi & Pembagian Tugas</li>
+                <li><strong>11 - 18 Nopember:</strong> Penulisan & Pengumpulan Naskah</li>
                 <li><strong>19 - 21 Nopember:</strong> Penyuntingan (Editing)</li>
-                <li><strong>22 - 24 Nopember:</strong> Finalisasi &amp; Persiapan Pracetak</li>
+                <li><strong>22 - 24 Nopember:</strong> Finalisasi & Persiapan Pracetak</li>
             </ul>
         </section>
 
@@ -108,17 +117,6 @@
         <div style="text-align: center;">
             <button onclick="bukaLink('data-urltemplate')" class="btn btn-blue" style="width: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">Unduh Template Naskah</button>
         </div>
-
-        <!-- PENGUMPULAN NASKAH -->
-        <section class="border-top-blue">
-            <h2 style="color: #2563eb;">Link Pengumpulan Naskah</h2>
-            <div class="grid-2">
-                <button onclick="bukaFolderGuru()" class="folder-btn">🔒 Folder Guru</button>
-                <button onclick="bukaLink('data-urlkelas7')" class="folder-btn">📁 Folder Siswa Kelas 7</button>
-                <button onclick="bukaLink('data-urlkelas8')" class="folder-btn">📁 Folder Siswa Kelas 8</button>
-                <button onclick="bukaLink('data-urlkelas9')" class="folder-btn">📁 Folder Siswa Kelas 9</button>
-            </div>
-        </section>
 
         <!-- FORMAT PENAMAAN FILE -->
         <section class="border-top-purple">
@@ -155,6 +153,17 @@
             </div>
         </section>
 
+        <!-- PENGUMPULAN NASKAH -->
+        <section class="border-top-blue">
+            <h2 style="color: #2563eb;">Link Pengumpulan Naskah</h2>
+            <div class="grid-2">
+                <button onclick="bukaFolderGuru()" class="folder-btn">🔒 Folder Guru</button>
+                <button onclick="bukaLink('data-urlkelas7')" class="folder-btn">📁 Folder Siswa Kelas 7</button>
+                <button onclick="bukaLink('data-urlkelas8')" class="folder-btn">📁 Folder Siswa Kelas 8</button>
+                <button onclick="bukaLink('data-urlkelas9')" class="folder-btn">📁 Folder Siswa Kelas 9</button>
+            </div>
+        </section>
+
         <!-- FAQ -->
         <section class="border-top-slate">
             <h2 style="color: #475569;">Tanya Jawab (FAQ)</h2>
@@ -167,7 +176,7 @@
     </main>
 
     <footer>
-        <p>© 2026 Tim Literasi Sekolah. <span class="admin-link" onclick="showAdminLogin()">[Admin]</span></p>
+        <p>&copy; 2026 Tim Literasi Sekolah. <span class="admin-link" onclick="showAdminLogin()">[Admin]</span></p>
     </footer>
 
     <!-- ==================== AREA MODAL / POPUP ==================== -->
@@ -231,7 +240,7 @@
     <!-- Pesan Alert Kustom -->
     <div id="modal-alert" class="modal">
         <div class="modal-content" style="text-align: center; width: 280px;">
-            <p id="alert-message" style="margin-bottom: 20px; font-weight: bold; color: #334155;">Data &amp; Link Berhasil Disimpan!</p>
+            <p id="alert-message" style="margin-bottom: 20px; font-weight: bold; color: #334155;"></p>
             <button onclick="closeModal('modal-alert')" class="btn btn-green" style="background-color: #0f766e; width: 100%;">OK</button>
         </div>
     </div>
@@ -239,7 +248,7 @@
     <!-- Pesan Confirm Kustom -->
     <div id="modal-confirm" class="modal">
         <div class="modal-content" style="text-align: center; width: 280px;">
-            <p id="confirm-message" style="margin-bottom: 20px; font-weight: bold; color: #334155;">Yakin akan mendownload versi HTML terbaru?</p>
+            <p id="confirm-message" style="margin-bottom: 20px; font-weight: bold; color: #334155;"></p>
             <div class="flex-end" style="justify-content: center;">
                 <button onclick="closeModal('modal-confirm')" class="btn btn-gray">Batal</button>
                 <button onclick="eksekusiDownload()" class="btn btn-green">Ya, Download</button>
@@ -354,6 +363,5 @@
             }
         }
     </script>
-
-
-</body></html>
+</body>
+</html>
