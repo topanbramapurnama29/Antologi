@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Portal LENTERA</title>
+    <style>
+        /* Desain Bawaan (Offline Mode) */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; color: #334155; margin: 0; padding-bottom: 40px; }
+        
+        header { background-color: #0f766e; color: white; padding: 30px 20px 20px 20px; text-align: center; }
+        header img.logo { display: block; margin: 0 auto 15px auto; width: 100px; height: auto; background-color: transparent; }
+        header h1 { margin: 0 0 10px 0; font-size: 28px; }
+        header p { margin: 0 0 5px 0; color: #ccfbf1; font-size: 14px; }
+        
+        /* Teks Berjalan (Marquee Animasi CSS Modern) */
+        .marquee-container { background-color: #fef08a; color: #854d0e; padding: 12px 0; overflow: hidden; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-bottom: 2px solid #facc15;}
+        .marquee-content { display: inline-block; animation: marquee 15s linear infinite; font-weight: bold; font-size: 14px; padding-left: 100%; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+        main { max-width: 800px; margin: 24px auto; padding: 0 20px; display: flex; flex-direction: column; gap: 24px; }
+        section { background: white; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .border-top-teal { border-top: 4px solid #0f766e; }
+        .border-top-amber { border-top: 4px solid #d97706; }
+        .border-top-blue { border-top: 4px solid #2563eb; }
+        .border-top-purple { border-top: 4px solid #9333ea; }
+        .border-top-slate { border-top: 4px solid #475569; }
+        h2 { margin-top: 0; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; font-size: 18px; }
+        .text-sm { font-size: 14px; line-height: 1.6; }
+        ul { margin: 0; padding-left: 20px; }
+        
+        /* Grid & Tombol */
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .btn { display: inline-block; padding: 14px; text-align: center; text-decoration: none; border-radius: 6px; font-weight: bold; color: white; cursor: pointer; border: none; font-size: 15px; font-family: inherit;}
+        .btn-blue { background-color: #2563eb; } .btn-blue:hover { background-color: #1d4ed8; }
+        .btn-green { background-color: #16a34a; } .btn-green:hover { background-color: #15803d; }
+        .btn-gray { background-color: #e2e8f0; color: #334155; } .btn-gray:hover { background-color: #cbd5e1; }
+        
+        .folder-btn { background-color: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 16px; text-align: center; text-decoration: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px; font-family: inherit;}
+        .folder-btn:hover { background-color: #e2e8f0; }
+        
+        /* Kotak Format File */
+        .format-box { background-color: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 12px; }
+        .format-box strong { color: #0f766e; display: block; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 8px; }
+        
+        /* Modal (Pop-up) */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); align-items: center; justify-content: center; z-index: 1000; }
+        .modal.active { display: flex; }
+        .modal-content { background: white; padding: 24px; border-radius: 8px; width: 320px; max-width: 90%; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 15px rgba(0,0,0,0.2); }
+        .modal-content h3 { margin-top: 0; color: #0f766e; }
+        .modal-content h4 { margin: 15px 0 5px 0; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;}
+        input { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-family: inherit; font-size: 13px;}
+        input:focus { outline: 2px solid #0f766e; border-color: transparent; }
+        label { font-size: 12px; font-weight: bold; color: #475569; display: block; margin-bottom: 4px; }
+        
+        .flex-end { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+        .flex-col { display: flex; flex-direction: column; gap: 8px; margin-top: 15px; }
+        
+        footer { text-align: center; margin-top: 40px; color: #64748b; font-size: 13px; }
+        .admin-link { cursor: pointer; font-weight: bold; text-decoration: none; color: inherit; }
+        .admin-link:hover { color: #0f766e; }
+    </style>
+</head>
+
+<body data-judul="Portal LENTERA" data-sandiguru="GURU61" data-urltemplate="#" data-urlguru="#" data-urlkelas7="#" data-urlkelas8="#" data-urlkelas9="#">
+
+    <header>
+        <!-- Memanggil gambar logo yang ada di satu folder yang sama -->
+        <img src="1000698638.jpg" alt="Logo SMP 61" class="logo" id="logo-sekolah">
+        <h1 id="display-judul">Portal LENTERA</h1>
+        <p>Literasi Pendidik Menerbitkan Cerita dan Antologi</p>
+        <p style="font-weight: bold; color: #f0fdfa;">Tahun Ajaran 2026/2027</p>
+    </header>
+
+    <!-- Teks Berjalan Pengingat (Alert) -->
+    <div class="marquee-container">
+        <div class="marquee-content">
+            📢 PENGUMUMAN: Dimohon kepada seluruh peserta untuk mengecek folder masing-masing dan bersegera melengkapi tugas pengumpulan naskah sebelum batas waktu yang ditentukan.
+        </div>
+    </div>
+
+    <main>
+        <!-- INFO PROGRAM -->
+        <section class="border-top-teal">
+            <h2>Informasi Program</h2>
+            <div class="text-sm">
+                <p><strong>Penanggung Jawab:</strong><br>Rissa Marissa, S.Pd., M.Pd.<br>NIP. 198103062009022001</p>
+                <hr style="border: 0; border-top: 1px dashed #e2e8f0; margin: 10px 0;">
+                <p><strong>Latar Belakang:</strong> Antologi; Merangkai bunga (berbagai tulisan) menjadi 1 buku.</p>
+                <p><strong>Sifat Kegiatan:</strong> Proyek Bersama</p>
+                <p><strong>Ketua Pelaksana:</strong> Heri | <strong>Wakil:</strong> Topan</p>
+                <p><strong>Tema:</strong> Warna-Warni Seragam: Kisah Inspiratif, Lucu, dan Haru dari Ruang Belajar</p>
+                <p><strong>Peserta:</strong> Guru dan Murid</p>
+                <p><strong>Target Waktu:</strong> Akhir Nopember</p>
+            </div>
+        </section>
+
+        <!-- JADWAL KEGIATAN -->
+        <section class="border-top-amber">
+            <h2 style="color: #d97706;">Jadwal Kegiatan</h2>
+            <ul class="text-sm">
+                <li><strong>7 - 10 Nopember:</strong> Sosialisasi & Pembagian Tugas</li>
+                <li><strong>11 - 18 Nopember:</strong> Penulisan & Pengumpulan Naskah</li>
+                <li><strong>19 - 21 Nopember:</strong> Penyuntingan (Editing)</li>
+                <li><strong>22 - 24 Nopember:</strong> Finalisasi & Persiapan Pracetak</li>
+            </ul>
+        </section>
+
+        <!-- TOMBOL UNDUH TEMPLATE -->
+        <div style="text-align: center;">
+            <button onclick="bukaLink('data-urltemplate')" class="btn btn-blue" style="width: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">Unduh Template Naskah</button>
+        </div>
+
+        <!-- PENGUMPULAN NASKAH -->
+        <section class="border-top-blue">
+            <h2 style="color: #2563eb;">Link Pengumpulan Naskah</h2>
+            <div class="grid-2">
+                <button onclick="bukaFolderGuru()" class="folder-btn">🔒 Folder Guru</button>
+                <button onclick="bukaLink('data-urlkelas7')" class="folder-btn">📁 Folder Siswa Kelas 7</button>
+                <button onclick="bukaLink('data-urlkelas8')" class="folder-btn">📁 Folder Siswa Kelas 8</button>
+                <button onclick="bukaLink('data-urlkelas9')" class="folder-btn">📁 Folder Siswa Kelas 9</button>
+            </div>
+        </section>
+
+        <!-- FORMAT PENAMAAN FILE -->
+        <section class="border-top-purple">
+            <h2 style="color: #9333ea;">Format File (.docx)</h2>
+            <div class="text-sm">
+                <div class="format-box">
+                    <strong>Contoh 1</strong>
+                    Nama : Topan<br>
+                    Kelas : 7A<br>
+                    Nomor presensi : 30<br>
+                    Ditulis : <span style="color:#2563eb; font-weight:bold;">Antologi 7A30 Topan.docx</span>
+                </div>
+                
+                <div class="format-box">
+                    <strong>Contoh 2</strong>
+                    Nama : Brama<br>
+                    Kelas : 8A<br>
+                    Nomor presensi : 6<br>
+                    Ditulis : <span style="color:#2563eb; font-weight:bold;">Antologi 8A06 Brama.docx</span>
+                </div>
+                
+                <div class="format-box">
+                    <strong>Contoh 3</strong>
+                    Nama : Purnama<br>
+                    Kelas : 9A<br>
+                    Nomor presensi : 14<br>
+                    Ditulis : <span style="color:#2563eb; font-weight:bold;">Antologi 9A14 Purnama.docx</span>
+                </div>
+
+                <div style="margin-top: 15px; padding: 10px; background-color: #fef2f2; border-left: 4px solid #ef4444; border-radius: 4px;">
+                    <strong>Catatan :</strong><br>
+                    Untuk guru ada di folder guru
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="border-top-slate">
+            <h2 style="color: #475569;">Tanya Jawab (FAQ)</h2>
+            <div class="text-sm">
+                <p><strong>Q: Apakah tulisan harus diketik?</strong><br>A: Iya.</p>
+                <p><strong>Q: Berapa minimal halaman?</strong><br>A: Minimal 2 halaman, maksimal 4 halaman.</p>
+                <p><strong>Q: Apakah naskah diseleksi?</strong><br>A: Tidak.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Tim Literasi Sekolah. <span class="admin-link" onclick="showAdminLogin()">[Admin]</span></p>
+    </footer>
+
+    <!-- ==================== AREA MODAL / POPUP ==================== -->
+
+    <!-- Login Admin -->
+    <div id="modal-admin-login" class="modal">
+        <div class="modal-content" style="width: 280px;">
+            <h3>Login Admin</h3>
+            <input type="password" id="input-admin-kode" placeholder="Masukkan Kode">
+            <div class="flex-end">
+                <button onclick="closeModal('modal-admin-login')" class="btn btn-gray">Batal</button>
+                <button onclick="cekAdmin()" class="btn btn-green" style="background-color: #0f766e;">Masuk</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel Admin Terpadu -->
+    <div id="modal-admin-panel" class="modal">
+        <div class="modal-content" style="width: 400px;">
+            <h3>Panel Admin</h3>
+            
+            <h4>Pengaturan Umum</h4>
+            <label>Judul Portal:</label>
+            <input type="text" id="input-edit-judul">
+            <label>Password Buka Folder Guru:</label>
+            <input type="text" id="input-edit-sandiguru">
+            
+            <h4>Pengaturan Link Google Drive</h4>
+            <label>Link Template Naskah:</label>
+            <input type="text" id="input-url-template" placeholder="Masukkan URL lengkap dengan https://">
+            <label>Link Folder Guru:</label>
+            <input type="text" id="input-url-guru" placeholder="Link GDrive Folder Guru">
+            <label>Link Folder Kelas 7:</label>
+            <input type="text" id="input-url-kelas7" placeholder="Link GDrive Kelas 7">
+            <label>Link Folder Kelas 8:</label>
+            <input type="text" id="input-url-kelas8" placeholder="Link GDrive Kelas 8">
+            <label>Link Folder Kelas 9:</label>
+            <input type="text" id="input-url-kelas9" placeholder="Link GDrive Kelas 9">
+
+            <div class="flex-col">
+                <button onclick="simpanAdmin()" class="btn btn-blue">Simpan Perubahan</button>
+                <button onclick="konfirmasiDownload()" class="btn btn-green">Download HTML Baru</button>
+                <button onclick="closeModal('modal-admin-panel')" class="btn btn-gray">Kembali ke Beranda</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Folder Guru -->
+    <div id="modal-guru-login" class="modal">
+        <div class="modal-content" style="width: 280px;">
+            <h3>Akses Folder Guru</h3>
+            <p style="font-size: 13px; margin-top:0;">Masukkan sandi untuk mengakses link.</p>
+            <input type="password" id="input-guru-kode" placeholder="Masukkan Sandi">
+            <div class="flex-end">
+                <button onclick="closeModal('modal-guru-login')" class="btn btn-gray">Batal</button>
+                <button onclick="cekSandiGuru()" class="btn btn-blue">Buka</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pesan Alert Kustom -->
+    <div id="modal-alert" class="modal">
+        <div class="modal-content" style="text-align: center; width: 280px;">
+            <p id="alert-message" style="margin-bottom: 20px; font-weight: bold; color: #334155;"></p>
+            <button onclick="closeModal('modal-alert')" class="btn btn-green" style="background-color: #0f766e; width: 100%;">OK</button>
+        </div>
+    </div>
+
+    <!-- Pesan Confirm Kustom -->
+    <div id="modal-confirm" class="modal">
+        <div class="modal-content" style="text-align: center; width: 280px;">
+            <p id="confirm-message" style="margin-bottom: 20px; font-weight: bold; color: #334155;"></p>
+            <div class="flex-end" style="justify-content: center;">
+                <button onclick="closeModal('modal-confirm')" class="btn btn-gray">Batal</button>
+                <button onclick="eksekusiDownload()" class="btn btn-green">Ya, Download</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        window.onload = () => {
+            let bodyJudul = document.body.getAttribute('data-judul');
+            document.getElementById('display-judul').innerText = bodyJudul;
+            document.getElementById('page-title').innerText = bodyJudul;
+        };
+
+        // Utilitas Pop-up
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        function customAlert(msg) {
+            document.getElementById('alert-message').innerText = msg;
+            openModal('modal-alert');
+        }
+
+        // Fungsi Global Pembuka Link
+        function bukaLink(dataAttr) {
+            let url = document.body.getAttribute(dataAttr);
+            if (url && url !== '#' && url.trim() !== '') {
+                window.open(url, '_blank');
+            } else {
+                customAlert("Link ini belum disetel oleh Admin. Silakan tunggu.");
+            }
+        }
+
+        // FUNGSI ADMIN
+        function showAdminLogin() {
+            document.getElementById('input-admin-kode').value = '';
+            openModal('modal-admin-login');
+        }
+
+        function cekAdmin() {
+            let kode = document.getElementById('input-admin-kode').value;
+            if (kode === "D6655ALO") {
+                closeModal('modal-admin-login');
+                // Tarik data atribut
+                document.getElementById('input-edit-judul').value = document.body.getAttribute('data-judul');
+                document.getElementById('input-edit-sandiguru').value = document.body.getAttribute('data-sandiguru');
+                document.getElementById('input-url-template').value = document.body.getAttribute('data-urltemplate');
+                document.getElementById('input-url-guru').value = document.body.getAttribute('data-urlguru');
+                document.getElementById('input-url-kelas7').value = document.body.getAttribute('data-urlkelas7');
+                document.getElementById('input-url-kelas8').value = document.body.getAttribute('data-urlkelas8');
+                document.getElementById('input-url-kelas9').value = document.body.getAttribute('data-urlkelas9');
+                openModal('modal-admin-panel');
+            } else {
+                customAlert("Kode Admin Salah!");
+            }
+        }
+
+        function simpanAdmin() {
+            // Tanamkan data
+            document.body.setAttribute('data-judul', document.getElementById('input-edit-judul').value);
+            document.body.setAttribute('data-sandiguru', document.getElementById('input-edit-sandiguru').value);
+            document.body.setAttribute('data-urltemplate', document.getElementById('input-url-template').value);
+            document.body.setAttribute('data-urlguru', document.getElementById('input-url-guru').value);
+            document.body.setAttribute('data-urlkelas7', document.getElementById('input-url-kelas7').value);
+            document.body.setAttribute('data-urlkelas8', document.getElementById('input-url-kelas8').value);
+            document.body.setAttribute('data-urlkelas9', document.getElementById('input-url-kelas9').value);
+            
+            // Perbarui Judul
+            let judulBaru = document.getElementById('input-edit-judul').value;
+            document.getElementById('display-judul').innerText = judulBaru;
+            document.getElementById('page-title').innerText = judulBaru;
+            
+            customAlert("Data & Link Berhasil Disimpan!");
+        }
+
+        // FUNGSI DOWNLOAD HTML
+        function konfirmasiDownload() {
+            document.getElementById('confirm-message').innerText = "Yakin akan mendownload versi HTML terbaru?";
+            openModal('modal-confirm');
+        }
+
+        function eksekusiDownload() {
+            closeModal('modal-confirm');
+            closeModal('modal-admin-panel');
+            
+            let htmlContent = document.documentElement.outerHTML;
+            let blob = new Blob([htmlContent], { type: 'text/html' });
+            let link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = "portal-lentera.html";
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // FUNGSI FOLDER GURU (Pakai Password)
+        function bukaFolderGuru() {
+            document.getElementById('input-guru-kode').value = '';
+            openModal('modal-guru-login');
+        }
+
+        function cekSandiGuru() {
+            let inputSandi = document.getElementById('input-guru-kode').value;
+            let sandiBenar = document.body.getAttribute('data-sandiguru');
+            
+            if (inputSandi === sandiBenar) {
+                closeModal('modal-guru-login');
+                bukaLink('data-urlguru');
+            } else {
+                customAlert("Sandi Folder Guru Salah!");
+            }
+        }
+    </script>
+</body>
+</html>
