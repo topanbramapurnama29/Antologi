@@ -9,7 +9,8 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; color: #334155; margin: 0; padding-bottom: 40px; }
         
         header { background-color: #0f766e; color: white; padding: 30px 20px 20px 20px; text-align: center; }
-        header img.logo { display: block; margin: 0 auto 15px auto; width: 100px; height: auto; background-color: transparent; }
+        /* Kursor diubah menjadi pointer agar bisa di-klik */
+        header img.logo { display: block; margin: 0 auto 15px auto; width: 100px; height: auto; background-color: transparent; cursor: pointer; }
         header h1 { margin: 0 0 10px 0; font-size: 28px; }
         header p { margin: 0 0 5px 0; color: #ccfbf1; font-size: 14px; }
         
@@ -57,13 +58,13 @@
         .flex-col { display: flex; flex-direction: column; gap: 8px; margin-top: 15px; }
         
         footer { text-align: center; margin-top: 40px; color: #64748b; font-size: 13px; }
-        .admin-link { cursor: pointer; font-weight: bold; text-decoration: none; color: inherit; }
-        .admin-link:hover { color: #0f766e; }
     </style>
 </head>
 
-<!-- Link default sudah ditanam langsung ke sistem -->
+<!-- Link dan Data default sudah ditanam langsung ke sistem -->
 <body data-judul="Portal LENTERA" 
+      data-subjudul="Literasi Pendidik Menerbitkan Cerita dan Antologi"
+      data-tema="Warna-Warni Seragam: Kisah Inspiratif, Lucu, dan Haru dari Ruang Belajar"
       data-sandiguru="GURU61" 
       data-urltemplate="https://drive.google.com/drive/folders/1Mv1gFb0Vq2FhbP_yBd_JBXY6kc_ACLHj" 
       data-urlguru="https://drive.google.com/drive/folders/1VgBgFfPdNXJ7SFhMY6h7ttujUsVXcugJ" 
@@ -72,11 +73,11 @@
       data-urlkelas9="https://drive.google.com/drive/folders/1iZypxqIuzcHx4z4Ea4U7gOYDipKciMml">
 
     <header>
-        <!-- Memanggil gambar logo yang ada di satu folder yang sama -->
-        <img src="logo61.jpg" alt="Logo SMP 61" class="logo" id="logo-sekolah">
+        <!-- Logo diberikan event click 3x untuk buka admin -->
+        <img src="logo61.jpg" alt="Logo SMP 61" class="logo" id="logo-sekolah" onclick="handleLogoClick()">
         <h1 id="display-judul">Portal LENTERA</h1>
-        <p>Literasi Pendidik Menerbitkan Cerita dan Antologi</p>
-        <p style="font-weight: bold; color: #f0fdfa;">Tahun Ajaran 2026/2027</p>
+        <p id="display-subjudul">Literasi Pendidik Menerbitkan Cerita dan Antologi</p>
+        <p style="font-weight: bold; color: #f0fdfa; margin-top:5px;">Tahun Ajaran 2026/2027</p>
     </header>
 
     <!-- Teks Berjalan Pengingat (Alert) -->
@@ -97,7 +98,7 @@
                 <p><strong>Sifat Kegiatan:</strong> Proyek Bersama</p>
                 <p><strong>Ketua Pelaksana:</strong><br>Heri Heryana, S.Pd., Gr.<br>NIP. 198806022024211001</p>
                 <p><strong>Wakil Ketua:</strong><br>Topan Bramapurnama, S.Pd., Gr.<br>NIP. 198609022023211006</p>
-                <p><strong>Tema:</strong> Warna-Warni Seragam: Kisah Inspiratif, Lucu, dan Haru dari Ruang Belajar</p>
+                <p><strong>Tema:</strong> <span id="display-tema">Warna-Warni Seragam: Kisah Inspiratif, Lucu, dan Haru dari Ruang Belajar</span></p>
                 <p><strong>Peserta:</strong> Guru dan Murid</p>
                 <p><strong>Target Waktu:</strong> Akhir Nopember</p>
             </div>
@@ -177,7 +178,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 Tim Literasi Sekolah. <span class="admin-link" onclick="showAdminLogin()">[Admin]</span></p>
+        <p>&copy; 2026 Tim Literasi Sekolah SMPN 61</p>
     </footer>
 
     <!-- ==================== AREA MODAL / POPUP ==================== -->
@@ -202,6 +203,10 @@
             <h4>Pengaturan Umum</h4>
             <label>Judul Portal:</label>
             <input type="text" id="input-edit-judul">
+            <label>Kepanjangan Judul:</label>
+            <input type="text" id="input-edit-subjudul">
+            <label>Tema Kegiatan:</label>
+            <input type="text" id="input-edit-tema">
             <label>Password Buka Folder Guru:</label>
             <input type="text" id="input-edit-sandiguru">
             
@@ -260,9 +265,11 @@
     <!-- ==================== JAVASCRIPT ==================== -->
     <script>
         window.onload = () => {
-            let bodyJudul = document.body.getAttribute('data-judul');
-            document.getElementById('display-judul').innerText = bodyJudul;
-            document.getElementById('page-title').innerText = bodyJudul;
+            // Pasang semua teks dinamis saat halaman dimuat
+            document.getElementById('display-judul').innerText = document.body.getAttribute('data-judul');
+            document.getElementById('page-title').innerText = document.body.getAttribute('data-judul');
+            document.getElementById('display-subjudul').innerText = document.body.getAttribute('data-subjudul');
+            document.getElementById('display-tema').innerText = document.body.getAttribute('data-tema');
         };
 
         // Utilitas Pop-up
@@ -271,6 +278,25 @@
         function customAlert(msg) {
             document.getElementById('alert-message').innerText = msg;
             openModal('modal-alert');
+        }
+
+        // Fitur Rahasia: Ketuk Logo 3x untuk Buka Admin
+        let logoClickCount = 0;
+        let logoClickTimer;
+
+        function handleLogoClick() {
+            logoClickCount++;
+            clearTimeout(logoClickTimer);
+            
+            // Reset hitungan jika jeda lebih dari 1 detik
+            logoClickTimer = setTimeout(() => {
+                logoClickCount = 0;
+            }, 1000);
+
+            if (logoClickCount === 3) {
+                showAdminLogin();
+                logoClickCount = 0; // reset
+            }
         }
 
         // Fungsi Global Pembuka Link
@@ -293,8 +319,10 @@
             let kode = document.getElementById('input-admin-kode').value;
             if (kode === "D6655ALO") {
                 closeModal('modal-admin-login');
-                // Tarik data atribut
+                // Tarik data atribut ke panel
                 document.getElementById('input-edit-judul').value = document.body.getAttribute('data-judul');
+                document.getElementById('input-edit-subjudul').value = document.body.getAttribute('data-subjudul');
+                document.getElementById('input-edit-tema').value = document.body.getAttribute('data-tema');
                 document.getElementById('input-edit-sandiguru').value = document.body.getAttribute('data-sandiguru');
                 document.getElementById('input-url-template').value = document.body.getAttribute('data-urltemplate');
                 document.getElementById('input-url-guru').value = document.body.getAttribute('data-urlguru');
@@ -308,8 +336,10 @@
         }
 
         function simpanAdmin() {
-            // Tanamkan data
+            // Tanamkan data kembali ke body
             document.body.setAttribute('data-judul', document.getElementById('input-edit-judul').value);
+            document.body.setAttribute('data-subjudul', document.getElementById('input-edit-subjudul').value);
+            document.body.setAttribute('data-tema', document.getElementById('input-edit-tema').value);
             document.body.setAttribute('data-sandiguru', document.getElementById('input-edit-sandiguru').value);
             document.body.setAttribute('data-urltemplate', document.getElementById('input-url-template').value);
             document.body.setAttribute('data-urlguru', document.getElementById('input-url-guru').value);
@@ -317,10 +347,11 @@
             document.body.setAttribute('data-urlkelas8', document.getElementById('input-url-kelas8').value);
             document.body.setAttribute('data-urlkelas9', document.getElementById('input-url-kelas9').value);
             
-            // Perbarui Judul
-            let judulBaru = document.getElementById('input-edit-judul').value;
-            document.getElementById('display-judul').innerText = judulBaru;
-            document.getElementById('page-title').innerText = judulBaru;
+            // Perbarui tampilan langsung
+            document.getElementById('display-judul').innerText = document.getElementById('input-edit-judul').value;
+            document.getElementById('page-title').innerText = document.getElementById('input-edit-judul').value;
+            document.getElementById('display-subjudul').innerText = document.getElementById('input-edit-subjudul').value;
+            document.getElementById('display-tema').innerText = document.getElementById('input-edit-tema').value;
             
             customAlert("Data & Link Berhasil Disimpan!");
         }
