@@ -67,10 +67,12 @@
     </style>
 </head>
 
+<!-- Link PDF Panduan langsung ditanam ke data-urlpanduan -->
 <body data-judul="Portal LENTERA" 
       data-subjudul="Literasi Pendidik Menerbitkan Cerita dan Antologi"
       data-tema="Kisah Inspiratif Guru dan Tenaga Kependidikan Lucu dan Haru dari Ruang Kelas"
       data-sandiguru="GURU61" 
+      data-urlpanduan="https://drive.google.com/drive/folders/1Mv1gFb0Vq2FhbP_yBd_JBXY6kc_ACLHj" 
       data-urlguru="https://drive.google.com/drive/folders/1VgBgFfPdNXJ7SFhMY6h7ttujUsVXcugJ" 
       data-urlkelas7="https://drive.google.com/drive/folders/1h8a54ra9xFCQWkXJcoIlRbBQYns2i47e" 
       data-urlkelas8="https://drive.google.com/drive/folders/13jAarcajQAWPWOtROuXtoV_kDVf7eJDp" 
@@ -106,9 +108,14 @@
             </div>
         </section>
 
-        <!-- PANDUAN PENULISAN (PENGGANTI TOMBOL DOWNLOAD) -->
+        <!-- TOMBOL UNDUH PDF PANDUAN -->
+        <div style="text-align: center;">
+            <button onclick="bukaLink('data-urlpanduan')" class="btn btn-blue" style="width: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">📥 Unduh PDF Panduan Penulisan</button>
+        </div>
+
+        <!-- PANDUAN PENULISAN (INFOGRAFIS) -->
         <section style="background-color: #f8fafc; border: 2px solid #0f766e;">
-            <h2 style="color: #0f766e; text-align: center; border-bottom: none; padding-bottom: 0;">Panduan & Sistematika Penulisan Cerpen</h2>
+            <h2 style="color: #0f766e; text-align: center; border-bottom: none; padding-bottom: 0;">Sistematika Penulisan Cerpen</h2>
             <p style="text-align: center; font-size: 13px; color: #475569; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">Cerpen berbasis pengalaman nyata. Ceritakan tawa, air mata, dan pelajaran hidup yang ditemui bersama murid dan gurumu.</p>
             
             <div class="grid-2">
@@ -252,6 +259,8 @@
             <input type="text" id="input-edit-sandiguru">
             
             <h4>Pengaturan Link Google Drive</h4>
+            <label>Link PDF Panduan:</label>
+            <input type="text" id="input-url-panduan" placeholder="Link GDrive PDF Panduan">
             <label>Link Folder Guru:</label>
             <input type="text" id="input-url-guru" placeholder="Link GDrive Folder Guru">
             <label>Link Folder Kelas 7:</label>
@@ -331,7 +340,7 @@
             if (url && url !== '#' && url.trim() !== '') {
                 window.open(url, '_blank');
             } else {
-                customAlert("Link ini belum disetel oleh Admin. Silakan tunggu.");
+                customAlert("Link ini belum disetel oleh Admin. Silakan disetel terlebih dahulu.");
             }
         }
 
@@ -348,6 +357,7 @@
                 document.getElementById('input-edit-subjudul').value = document.body.getAttribute('data-subjudul');
                 document.getElementById('input-edit-tema').value = document.body.getAttribute('data-tema');
                 document.getElementById('input-edit-sandiguru').value = document.body.getAttribute('data-sandiguru');
+                document.getElementById('input-url-panduan').value = document.body.getAttribute('data-urlpanduan');
                 document.getElementById('input-url-guru').value = document.body.getAttribute('data-urlguru');
                 document.getElementById('input-url-kelas7').value = document.body.getAttribute('data-urlkelas7');
                 document.getElementById('input-url-kelas8').value = document.body.getAttribute('data-urlkelas8');
@@ -363,6 +373,7 @@
             document.body.setAttribute('data-subjudul', document.getElementById('input-edit-subjudul').value);
             document.body.setAttribute('data-tema', document.getElementById('input-edit-tema').value);
             document.body.setAttribute('data-sandiguru', document.getElementById('input-edit-sandiguru').value);
+            document.body.setAttribute('data-urlpanduan', document.getElementById('input-url-panduan').value);
             document.body.setAttribute('data-urlguru', document.getElementById('input-url-guru').value);
             document.body.setAttribute('data-urlkelas7', document.getElementById('input-url-kelas7').value);
             document.body.setAttribute('data-urlkelas8', document.getElementById('input-url-kelas8').value);
