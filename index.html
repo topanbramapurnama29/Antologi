@@ -1,4 +1,6 @@
-<html lang="id"><head>
+<!DOCTYPE html>
+<html lang="id">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Portal LENTERA</title>
@@ -62,10 +64,16 @@
         .flex-col { display: flex; flex-direction: column; gap: 8px; margin-top: 15px; }
         
         footer { text-align: center; margin-top: 40px; color: #64748b; font-size: 13px; }
+
+        /* Hitung Mundur */
+        .cd-box { background-color: #1e293b; color: white; padding: 12px; border-radius: 8px; min-width: 55px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-bottom: 3px solid #0f766e;}
+        .cd-box.mili { background-color: #ef4444; border-bottom: 3px solid #b91c1c; }
+        .cd-box span { display: block; font-size: 26px; font-weight: bold; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+        .cd-box small { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #cbd5e1; display: block;}
+        .cd-box.mili small { color: #fecaca; }
     </style>
 </head>
 
-<!-- Link PDF Panduan langsung ditanam ke data-urlpanduan -->
 <body data-judul="Portal LENTERA" data-subjudul="Literasi Pendidik Menerbitkan Cerita dan Antologi" data-tema="Kisah Inspiratif Guru dan Tenaga Kependidikan Lucu dan Haru dari Ruang Kelas" data-sandiguru="GURU61" data-urlpanduan="https://drive.google.com/drive/folders/1Mv1gFb0Vq2FhbP_yBd_JBXY6kc_ACLHj" data-urlguru="https://drive.google.com/drive/folders/1JTCuiguVW29cRKwC9_AAIi-nUwWOInEy" data-urlkelas7="https://drive.google.com/drive/folders/1h8a54ra9xFCQWkXJcoIlRbBQYns2i47e" data-urlkelas8="https://drive.google.com/drive/folders/13jAarcajQAWPWOtROuXtoV_kDVf7eJDp" data-urlkelas9="https://drive.google.com/drive/folders/1iZypxqIuzcHx4z4Ea4U7gOYDipKciMml">
 
     <header>
@@ -77,11 +85,24 @@
 
     <div class="marquee-container">
         <div class="marquee-content">
-            📢 PENGUMUMAN: Dimohon kepada seluruh peserta untuk mengecek folder masing-masing dan bersegera melengkapi tugas pengumpulan naskah sebelum batas waktu yang ditentukan.
+            📣 PENGUMUMAN: Dimohon kepada seluruh peserta untuk mengecek folder masing-masing dan bersegera melengkapi tugas pengumpulan naskah sebelum batas waktu yang ditentukan.
         </div>
     </div>
 
     <main>
+        <!-- HITUNG MUNDUR -->
+        <section style="border-top: 4px solid #ef4444; background-color: #fff1f2;">
+            <h2 style="color: #e11d48; text-align: center; border-bottom: none; padding-bottom: 0;">Sisa Waktu Pengumpulan</h2>
+            <div id="countdown-container" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 15px;">
+                <div class="cd-box"><span id="cd-hari">00</span><small>Hari</small></div>
+                <div class="cd-box"><span id="cd-jam">00</span><small>Jam</small></div>
+                <div class="cd-box"><span id="cd-menit">00</span><small>Menit</small></div>
+                <div class="cd-box"><span id="cd-detik">00</span><small>Detik</small></div>
+                <div class="cd-box mili"><span id="cd-mili">00</span><small>Ms</small></div>
+            </div>
+            <p id="cd-expired" style="display: none; color: #e11d48; font-weight: bold; text-align: center; font-size: 18px; margin-top: 15px;">Waktu Pengumpulan Telah Berakhir!</p>
+        </section>
+
         <!-- INFO PROGRAM -->
         <section class="border-top-teal">
             <h2>Informasi Program</h2>
@@ -200,10 +221,10 @@
         <section class="border-top-blue">
             <h2 style="color: #2563eb;">Link Pengumpulan Naskah</h2>
             <div class="grid-2">
-                <button onclick="bukaFolderGuru()" class="folder-btn">🔒 Folder Guru / GTK</button>
-                <button onclick="bukaLink('data-urlkelas7')" class="folder-btn">📁 Folder Siswa Kelas 7</button>
-                <button onclick="bukaLink('data-urlkelas8')" class="folder-btn">📁 Folder Siswa Kelas 8</button>
-                <button onclick="bukaLink('data-urlkelas9')" class="folder-btn">📁 Folder Siswa Kelas 9</button>
+                <button onclick="bukaFolderGuru()" class="folder-btn">📁 Folder Guru / GTK</button>
+                <button onclick="bukaLink('data-urlkelas7')" class="folder-btn">📂 Folder Siswa Kelas 7</button>
+                <button onclick="bukaLink('data-urlkelas8')" class="folder-btn">📂 Folder Siswa Kelas 8</button>
+                <button onclick="bukaLink('data-urlkelas9')" class="folder-btn">📂 Folder Siswa Kelas 9</button>
             </div>
         </section>
 
@@ -282,7 +303,7 @@
 
     <div id="modal-alert" class="modal">
         <div class="modal-content" style="text-align: center; width: 280px;">
-            <p id="alert-message" style="margin-bottom: 20px; font-weight: bold; color: #334155;">Data &amp; Link Berhasil Disimpan!</p>
+            <p id="alert-message" style="margin-bottom: 20px; font-weight: bold; color: #334155;">Kode Admin Salah!</p>
             <button onclick="closeModal('modal-alert')" class="btn btn-green" style="background-color: #0f766e; width: 100%;">OK</button>
         </div>
     </div>
@@ -305,6 +326,37 @@
             document.getElementById('display-subjudul').innerText = document.body.getAttribute('data-subjudul');
             document.getElementById('display-tema').innerText = document.body.getAttribute('data-tema');
         };
+
+        // LOGIKA HITUNG MUNDUR
+        // Atur tenggat waktu ke 21 November 2026 pukul 23:59:59
+        const deadline = new Date("Nov 21, 2026 23:59:59").getTime();
+
+        const timerInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = deadline - now;
+
+            // Jika waktu sudah habis
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                document.getElementById("countdown-container").style.display = "none";
+                document.getElementById("cd-expired").style.display = "block";
+                return;
+            }
+
+            // Perhitungan hari, jam, menit, detik, dan milidetik
+            const hari = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const jam = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const menit = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const detik = Math.floor((distance % (1000 * 60)) / 1000);
+            const mili = Math.floor((distance % 1000) / 10); // Menampilkan 2 digit milidetik
+
+            // Menuliskan hasil ke dalam elemen HTML dengan format 2 digit (01, 02, dst)
+            document.getElementById("cd-hari").innerText = hari.toString().padStart(2, '0');
+            document.getElementById("cd-jam").innerText = jam.toString().padStart(2, '0');
+            document.getElementById("cd-menit").innerText = menit.toString().padStart(2, '0');
+            document.getElementById("cd-detik").innerText = detik.toString().padStart(2, '0');
+            document.getElementById("cd-mili").innerText = mili.toString().padStart(2, '0');
+        }, 10);
 
         function openModal(id) { document.getElementById(id).classList.add('active'); }
         function closeModal(id) { document.getElementById(id).classList.remove('active'); }
@@ -414,6 +466,5 @@
             }
         }
     </script>
-
-
-</body></html>
+</body>
+</html>
