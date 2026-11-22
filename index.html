@@ -67,7 +67,6 @@
         header h1 { margin: 0 0 8px 0; font-size: 28px; letter-spacing: 0.4px; }
         header p { margin: 0 0 5px 0; color: #ccfbf1; font-size: 14px; }
         .header-tahun { font-weight: bold; color: #fef3c7; margin-top: 6px; font-size: 14px; letter-spacing: 0.5px; }
-
         /* Tombol Filosofi Logo di Header */
         .header-actions { margin-top: 16px; }
         .btn-filosofi {
@@ -97,7 +96,6 @@
         .marquee-container { background-color: #fef08a; color: #854d0e; padding: 12px 0; overflow: hidden; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-bottom: 2px solid #facc15; }
         .marquee-content { display: inline-block; animation: marquee 15s linear infinite; font-weight: bold; font-size: 14px; padding-left: 100%; }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
-
         main { max-width: 800px; margin: 24px auto; padding: 0 20px; display: flex; flex-direction: column; gap: 24px; }
         section { background: white; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         .border-top-teal { border-top: 4px solid #0f766e; }
@@ -105,6 +103,41 @@
         .border-top-blue { border-top: 4px solid #2563eb; }
         .border-top-purple { border-top: 4px solid #9333ea; }
         .border-top-slate { border-top: 4px solid #475569; }
+
+        /* Kartu Foto Guru di Awal */
+        .hero-guru-card {
+            background: linear-gradient(180deg, #ffffff 0%, #f0fdfa 100%);
+            border-top: 4px solid #0f766e;
+            border-bottom: 3px solid #f59e0b;
+            padding: 20px;
+            text-align: center;
+        }
+        .hero-guru-frame {
+            max-width: 520px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 3px solid #e2e8f0;
+            box-shadow: 0 8px 20px rgba(11, 37, 69, 0.14);
+            background-color: #ffffff;
+        }
+        .hero-guru-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+        .hero-guru-caption {
+            margin: 14px 0 0 0;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0b2545;
+        }
+        .hero-guru-subcaption {
+            margin: 4px 0 0 0;
+            font-size: 13px;
+            color: #475569;
+        }
         
         h2 { margin-top: 0; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; font-size: 18px; }
         .text-sm { font-size: 14px; line-height: 1.6; }
@@ -146,7 +179,6 @@
         
         .flex-end { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
         .flex-col { display: flex; flex-direction: column; gap: 8px; margin-top: 15px; }
-
         /* Modal Khusus Filosofi Logo (Estetik) */
         .modal-filosofi-box {
             width: 720px;
@@ -188,21 +220,6 @@
         }
         .filosofi-close-x:hover { background: rgba(255,255,255,0.28); }
         .filosofi-logo-showcase {
-            width: 124px;
-            height: 124px;
-            border-radius: 50%;
-            background: #ffffff;
-            padding: 12px;
-            margin: 0 auto 12px auto;
-            box-sizing: border-box;
-            border: 3px solid #fbbf24;
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .filosofi-logo-showcase {
             width: 132px;
             height: 132px;
             margin: 0 auto 12px auto;
@@ -220,7 +237,6 @@
             display: block;
             filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.3));
         }
-
         .filosofi-hero h3 {
             margin: 0 0 4px 0;
             color: #ffffff;
@@ -359,13 +375,13 @@
         .cd-box span { display: block; font-size: 26px; font-weight: bold; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
         .cd-box small { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #cbd5e1; display: block; }
         .cd-box.mili small { color: #fecaca; }
-
         /* Responsif Layar HP */
         @media (max-width: 640px) {
             .logo-group { gap: 14px; }
             header img.logo-sekolah { height: 150px; }
             .logo-lentera-wrap { width: 100px; height: 100px; padding: 0; }
             .logo-divider { height: 54px; }
+            .hero-guru-card { padding: 14px; }
             .filosofi-grid { grid-template-columns: 1fr; }
             .filosofi-body { padding: 18px 16px; }
             .filosofi-hero { padding: 20px 16px 16px 16px; }
@@ -396,6 +412,14 @@
         </div>
     </div>
     <main>
+        <!-- FOTO SAMBUTAN GURU -->
+        <section class="hero-guru-card">
+            <div class="hero-guru-frame">
+                <img src="foto-guru.png" alt="Guru dan Tenaga Kependidikan SMPN 61" class="hero-guru-img">
+            </div>
+            <p class="hero-guru-caption">Guru &amp; Tenaga Kependidikan SMP Negeri 61 Bandung</p>
+            <p class="hero-guru-subcaption">Menyalakan lentera literasi melalui kisah nyata yang menginspirasi dari ruang kelas.</p>
+        </section>
         <!-- HITUNG MUNDUR -->
         <section style="border-top: 4px solid #ef4444; background-color: #fff1f2;">
             <h2 style="color: #e11d48; text-align: center; border-bottom: none; padding-bottom: 0;">Sisa Waktu Pengumpulan</h2>
@@ -541,7 +565,6 @@
     <footer>
         <p>© 2026 Tim Literasi Sekolah SMPN 61</p>
     </footer>
-
     <!-- ==================== AREA MODAL / POPUP ==================== -->
     <!-- MODAL FILOSOFI LOGO -->
     <div id="modal-filosofi" class="modal" onclick="tutupJikaBackdrop(event, 'modal-filosofi')">
@@ -554,7 +577,6 @@
                 <h3>Filosofi Logo LENTERA</h3>
                 <p>Literasi Pendidik Menerbitkan Cerita dan Antologi • SMP Negeri 61 Bandung</p>
             </div>
-
             <div class="filosofi-body">
                 <!-- Bagian Bentuk & Elemen -->
                 <div class="filosofi-section-title">
@@ -595,7 +617,6 @@
                         <p>Tulisan melingkar "LITERASI PENDIDIK MENERBITKAN CERITA DAN ANTOLOGI" di sisi atas menegaskan visi program secara utuh, sementara tulisan "SMPN 61" yang diapit dua bintang di sisi bawah menunjukkan identitas lembaga serta sinergi dua pilar utama—GTK dan murid—dalam meraih prestasi.</p>
                     </div>
                 </div>
-
                 <!-- Bagian Filosofi Warna -->
                 <div class="filosofi-section-title">
                     <span class="filosofi-section-badge">02</span>
@@ -625,13 +646,11 @@
                     </div>
                 </div>
             </div>
-
             <div class="filosofi-footer">
                 <button type="button" onclick="closeModal('modal-filosofi')" class="btn-filosofi-tutup">Tutup</button>
             </div>
         </div>
     </div>
-
     <div id="modal-admin-login" class="modal">
         <div class="modal-content" style="width: 280px;">
             <h3>Login Admin</h3>
@@ -699,7 +718,6 @@
             </div>
         </div>
     </div>
-
     <!-- ==================== JAVASCRIPT ==================== -->
     <script>
         window.onload = () => {
@@ -734,7 +752,6 @@
             document.getElementById("cd-detik").innerText = detik.toString().padStart(2, '0');
             document.getElementById("cd-mili").innerText = mili.toString().padStart(2, '0');
         }, 10);
-
         function openModal(id) { document.getElementById(id).classList.add('active'); }
         function closeModal(id) { document.getElementById(id).classList.remove('active'); }
         function tutupJikaBackdrop(event, id) {
@@ -747,7 +764,6 @@
                 closeModal('modal-filosofi');
             }
         });
-
         function customAlert(msg) {
             document.getElementById('alert-message').innerText = msg;
             openModal('modal-alert');
